@@ -20,6 +20,12 @@ parts:
     source-type: git
     after:
       - desktop-qt5
+    override-build: |
+      snapcraftctl build
+      qmake-qt5 PREFIX=/usr mpc-qt.pro \
+        QMAKE_CFLAGS_RELEASE="${CFLAGS}" \
+        QMAKE_CXXFLAGS_RELEASE="${CXXFLAGS}" \
+        QMAKE_LFLAGS_RELEASE="${LDFLAGS}"
     stage-packages:
       - mpv
       - libqt5x11extras5
