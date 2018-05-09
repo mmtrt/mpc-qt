@@ -20,6 +20,10 @@ parts:
     source-type: git
     after:
       - desktop-qt5
+    stage-packages:
+      - mpv
+      - libqt5x11extras5
+      - libvdpau-va-gl1
     build-packages:
       - qtcreator
       - qt5-default
