@@ -14,11 +14,20 @@ architectures:
 parts:
   desktop-qt5:
     source-tag: v20180201
+  ppa:
+    plugin: nil
+    override-build: |
+      snapcraftctl build
+      add-apt-repository ppa:mc3man/mpv-tests -y
+      apt update
+    build-packages:
+      - software-properties-common
   mpc-qt:
     plugin: qmake
     source: https://github.com/cmdrkotori/mpc-qt
     source-type: git
     after:
+      - ppa
       - desktop-qt5
     override-build: |
       snapcraftctl build
