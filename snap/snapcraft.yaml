@@ -1,6 +1,6 @@
 name: mpc-qt
-version: latest
-version-script: cat $SNAPCRAFT_STAGE/version
+version: 18.03
+# version-script: cat $SNAPCRAFT_STAGE/version
 summary: A clone of Media Player Classic reimplemented in Qt.
 description: |
   Media Player Classic Home Cinema (mpc-hc) is considered by many to be the quintessential media player for the Windows desktop. Media Player Classic Qute Theater (mpc-qt) aims to reproduce most of the interface and functionality of mpc-hc while using libmpv to play video instead of DirectShow.
