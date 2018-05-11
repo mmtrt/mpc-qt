@@ -1,6 +1,6 @@
 name: mpc-qt
-version: 18.03
-# version-script: cat $SNAPCRAFT_STAGE/version
+version: latest
+version-script: cat $SNAPCRAFT_STAGE/version
 summary: A clone of Media Player Classic reimplemented in Qt.
 description: |
   Media Player Classic Home Cinema (mpc-hc) is considered by many to be the quintessential media player for the Windows desktop. Media Player Classic Qute Theater (mpc-qt) aims to reproduce most of the interface and functionality of mpc-hc while using libmpv to play video instead of DirectShow.
@@ -35,6 +35,9 @@ parts:
         QMAKE_CFLAGS_RELEASE="${CFLAGS}" \
         QMAKE_CXXFLAGS_RELEASE="${CXXFLAGS}" \
         QMAKE_LFLAGS_RELEASE="${LDFLAGS}"
+      set -ex
+      ver=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep Leap | grep mpc-qt | sed '1,11d;13,18d;s|href="||g;s|">64||g' | awk '{print $3}' | sed -n 's/.*mpc-qt//p' | cut -c02-06)
+      echo $ver > $SNAPCRAFT_STAGE/version
     stage-packages:
       - mpv
       - libqt5x11extras5
@@ -45,6 +48,7 @@ parts:
       - libqt5x11extras5-dev
       - qttools5-dev-tools
       - libmpv-dev
+      - wget
 
 apps:
   mpc-qt:
