@@ -20,7 +20,7 @@ parts:
       snapcraftctl build
       add-apt-repository ppa:mc3man/mpv-tests -y
       add-apt-repository ppa:jonathonf/ffmpeg-3 -y
-      apt-add-repository http://archive.neon.kde.org/release -y
+      apt-add-repository http://archive.neon.kde.org/user -y
       wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
       apt update
     build-packages:
