@@ -54,6 +54,10 @@ parts:
     build-packages:
       - wget
       - rpm2cpio
+    prime:
+      - -usr/share/doc
+      - -usr/share/man
+      - -usr/share/lintian
 
 apps:
   mpc-qt:
