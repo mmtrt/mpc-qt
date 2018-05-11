@@ -27,18 +27,12 @@ parts:
       - software-properties-common
       - wget
   mpc-qt:
-    plugin: qmake
-    source: https://github.com/cmdrkotori/mpc-qt
-    source-type: git
+    plugin: nil
     after:
       - ppa
       - desktop-qt5
     override-build: |
       snapcraftctl build
-      qmake-qt5 PREFIX=/usr mpc-qt.pro \
-        QMAKE_CFLAGS_RELEASE="${CFLAGS}" \
-        QMAKE_CXXFLAGS_RELEASE="${CXXFLAGS}" \
-        QMAKE_LFLAGS_RELEASE="${LDFLAGS}"
       set -ex
       ver=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep Leap | grep mpc-qt | sed '1,11d;13,18d;s|href="||g;s|">64||g' | awk '{print $3}' | sed -n 's/.*mpc-qt//p' | cut -c02-06)
       echo $ver > $SNAPCRAFT_STAGE/version
@@ -47,11 +41,6 @@ parts:
       - libqt5x11extras5
       - libvdpau-va-gl1
     build-packages:
-      - qtcreator
-      - qt5-default
-      - libqt5x11extras5-dev
-      - qttools5-dev-tools
-      - libmpv-dev
       - wget
 
 apps:
