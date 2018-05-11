@@ -54,6 +54,7 @@ parts:
     build-packages:
       - wget
       - rpm2cpio
+      - cpio
     prime:
       - -usr/share/doc
       - -usr/share/man
