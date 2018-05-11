@@ -44,6 +44,11 @@ parts:
       sed -i 's|Icon=mpc-qt|Icon=/usr/share/pixmaps/mpc-qt\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/mpc-qt.desktop
     stage-packages:
       - mpv
+      - libmpv1
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5network5
+      - libqt5quickwidgets5
       - libqt5x11extras5
       - libvdpau-va-gl1
     build-packages:
