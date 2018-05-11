@@ -36,17 +36,24 @@ parts:
       set -ex
       ver=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep Leap | grep mpc-qt | sed '1,11d;13,18d;s|href="||g;s|">64||g' | awk '{print $3}' | sed -n 's/.*mpc-qt//p' | cut -c02-06)
       echo $ver > $SNAPCRAFT_STAGE/version
+      mpcurl=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep Leap | grep mpc-qt | sed '1,11d;13,18d;s|href="||g;s|">64||g' | awk '{print $3}')
+      wget $mpcurl
+      rpm2cpio mpc-qt*.rpm | cpio -idmv
+      cp 'usr/share/applications/Media Player Classic Qute Theater.desktop' usr/share/applications/mpc-qt.desktop
+      rm 'usr/share/applications/Media Player Classic Qute Theater.desktop' && cp -R -p usr $SNAPCRAFT_PART_INSTALL
+      sed -i 's|Icon=mpc-qt|Icon=/usr/share/pixmaps/mpc-qt\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/mpc-qt.desktop
     stage-packages:
       - mpv
       - libqt5x11extras5
       - libvdpau-va-gl1
     build-packages:
       - wget
+      - rpm2cpio
 
 apps:
   mpc-qt:
     command: desktop-launch $SNAP/usr/bin/mpc-qt
-    desktop: 'usr/share/applications/Media Player Classic Qute Theater.desktop'
+    desktop: usr/share/applications/mpc-qt.desktop
     plugs:
       - x11
       - home
