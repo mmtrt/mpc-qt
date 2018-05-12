@@ -13,7 +13,6 @@ architectures:
 
 parts:
   desktop-qt5:
-    source-tag: v20180201
     stage:
       - -usr/share/doc
       - -usr/share/man
