@@ -49,11 +49,11 @@ parts:
       - -usr/lib/x86_64-linux-gnu/libQt5EglDeviceIntegration.so.5*
       - -usr/lib/x86_64-linux-gnu/libQt5Svg.so.5*
       - -usr/lib/x86_64-linux-gnu/libQt5XcbQpa.so.5*
-      - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0.3.0
-      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0.0.0
-      - -usr/lib/x86_64-linux-gnu/libwayland-server.so.0.1.0
-      - -usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so.0.0.0
-      - -usr/lib/x86_64-linux-gnu/libxkbcommon.so.0.0.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-client.so*
+      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so*
+      - -usr/lib/x86_64-linux-gnu/libwayland-server.so*
+      - -usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so*
+      - -usr/lib/x86_64-linux-gnu/libxkbcommon.so*
       - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqconnmanbearer.so
       - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqgenericbearer.so
       - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqnmbearer.so
