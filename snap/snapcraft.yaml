@@ -14,6 +14,63 @@ architectures:
 parts:
   desktop-qt5:
     source-tag: v20180201
+    stage:
+      - -usr/share/doc
+      - -usr/share/man
+      - -usr/share/lintian
+      - -etc/fonts/conf.avail/10-antialias.conf
+      - -etc/fonts/conf.avail/10-hinting-full.conf
+      - -etc/fonts/conf.avail/10-hinting-medium.conf
+      - -etc/fonts/conf.avail/10-hinting-slight.conf
+      - -etc/fonts/conf.avail/30-metric-aliases.conf
+      - -etc/fonts/conf.avail/40-nonlatin.conf
+      - -etc/fonts/conf.avail/45-latin.conf
+      - -etc/fonts/conf.avail/53-monospace-lcd-filter.conf
+      - -etc/fonts/conf.avail/60-latin.conf
+      - -etc/fonts/conf.avail/65-nonlatin.conf
+      - -etc/fonts/fonts.conf
+      - -lib/udev/hwdb.d/90-libinput-model-quirks.hwdb
+      - -lib/udev/libinput-device-group
+      - -lib/udev/libinput-model-quirks
+      - -lib/udev/rules.d/90-libinput-model-quirks.rules
+      - -usr/bin/fc-cache
+      - -usr/bin/fc-cat
+      - -usr/bin/fc-list
+      - -usr/bin/fc-match
+      - -usr/bin/fc-pattern
+      - -usr/bin/fc-query
+      - -usr/bin/fc-scan
+      - -usr/bin/fc-validate
+      - -usr/lib/x86_64-linux-gnu/libwayland-client.so.0.3.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so.0.0.0
+      - -usr/lib/x86_64-linux-gnu/libwayland-server.so.0.1.0
+      - -usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so.0.0.0
+      - -usr/lib/x86_64-linux-gnu/libxkbcommon.so.0.0.0
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqconnmanbearer.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqgenericbearer.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqnmbearer.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevkeyboardplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevmouseplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevtabletplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevtouchplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqlibinputplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqtuiotouchplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/imageformats/libqgif.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/imageformats/libqico.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/imageformats/libqjpeg.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqeglfs.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqlinuxfb.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqminimal.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqminimalegl.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqoffscreen.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqxcb.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/xcbglintegrations/libqxcb-egl-integration.so
+      - -usr/lib/x86_64-linux-gnu/qt5/plugins/xcbglintegrations/libqxcb-glx-integration.so
+
   ppa:
     plugin: nil
     override-build: |
