@@ -23,6 +23,7 @@ parts:
       apt-add-repository http://archive.neon.kde.org/user -y
       wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
       apt update
+      apt upgrade -y && apt install -f -y
     build-packages:
       - software-properties-common
       - wget
