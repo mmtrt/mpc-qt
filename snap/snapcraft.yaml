@@ -111,12 +111,14 @@ parts:
     stage-packages:
       - mpv
       - libmpv1
+      - ffmpeg
       - libqt5core5a
       - libqt5gui5
       - libqt5network5
       - libqt5quickwidgets5
       - libqt5x11extras5
       - libvdpau-va-gl1
+      - libgl1-mesa-dri
       - libgl1-mesa-glx
       - libglu1-mesa
     build-packages:
