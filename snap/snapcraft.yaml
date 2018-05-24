@@ -40,15 +40,15 @@ parts:
       - -usr/bin/fc-query
       - -usr/bin/fc-scan
       - -usr/bin/fc-validate
-      - -usr/lib/x86_64-linux-gnu/libQt5Network.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5DBus.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5Gui.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5Core.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5EglDeviceIntegration.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5Svg.so.5*
-      - -usr/lib/x86_64-linux-gnu/libQt5XcbQpa.so.5*
+      - -usr/lib/x86_64-linux-gnu/libQt5Network.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5DBus.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Gui.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Core.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5EglDeviceIntegration.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Svg.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5XcbQpa.so*
       - -usr/lib/x86_64-linux-gnu/libwayland-client.so*
       - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so*
       - -usr/lib/x86_64-linux-gnu/libwayland-server.so*
