@@ -78,6 +78,9 @@ parts:
       - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqxcb.so
       - -usr/lib/x86_64-linux-gnu/qt5/plugins/xcbglintegrations/libqxcb-egl-integration.so
       - -usr/lib/x86_64-linux-gnu/qt5/plugins/xcbglintegrations/libqxcb-glx-integration.so
+      - -usr/lib/x86_64-linux-gnu/libfontconfig.so*
+      - -usr/lib/x86_64-linux-gnu/libharfbuzz.so*
+      - -usr/lib/x86_64-linux-gnu/libinput.so*
 
   ppa:
     plugin: nil
