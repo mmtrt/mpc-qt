@@ -1,6 +1,5 @@
 name: mpc-qt
-version: latest
-version-script: cat $SNAPCRAFT_STAGE/version
+version: 18.03+git
 summary: A clone of Media Player Classic reimplemented in Qt.
 description: |
   Media Player Classic Home Cinema (mpc-hc) is considered by many to be the quintessential media player for the Windows desktop. Media Player Classic Qute Theater (mpc-qt) aims to reproduce most of the interface and functionality of mpc-hc while using libmpv to play video instead of DirectShow.
@@ -11,87 +10,22 @@ architectures:
   - build-on: amd64
     run-on: [amd64]
 
+plugs:
+  kde-frameworks-5-plug:
+    content: kde-frameworks-5-47-qt-5-11-ubuntu-1604
+    default-provider: kde-frameworks-5
+    interface: content
+    target: kf5
+
 parts:
-  desktop-qt5:
-    stage:
-      - -usr/share/doc
-      - -usr/share/man
-      - -usr/share/lintian
-      - -etc/fonts/conf.avail/10-antialias.conf
-      - -etc/fonts/conf.avail/10-hinting-full.conf
-      - -etc/fonts/conf.avail/10-hinting-medium.conf
-      - -etc/fonts/conf.avail/10-hinting-slight.conf
-      - -etc/fonts/conf.avail/30-metric-aliases.conf
-      - -etc/fonts/conf.avail/40-nonlatin.conf
-      - -etc/fonts/conf.avail/45-latin.conf
-      - -etc/fonts/conf.avail/53-monospace-lcd-filter.conf
-      - -etc/fonts/conf.avail/60-latin.conf
-      - -etc/fonts/conf.avail/65-nonlatin.conf
-      - -etc/fonts/fonts.conf
-      - -lib/udev/hwdb.d/90-libinput-model-quirks.hwdb
-      - -lib/udev/libinput-device-group
-      - -lib/udev/libinput-model-quirks
-      - -lib/udev/rules.d/90-libinput-model-quirks.rules
-      - -usr/bin/fc-cache
-      - -usr/bin/fc-cat
-      - -usr/bin/fc-list
-      - -usr/bin/fc-match
-      - -usr/bin/fc-pattern
-      - -usr/bin/fc-query
-      - -usr/bin/fc-scan
-      - -usr/bin/fc-validate
-      - -usr/lib/x86_64-linux-gnu/libQt5Network.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5DBus.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Gui.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Core.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5EglDeviceIntegration.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Svg.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5XcbQpa.so*
-      - -usr/lib/x86_64-linux-gnu/libwayland-client.so*
-      - -usr/lib/x86_64-linux-gnu/libwayland-cursor.so*
-      - -usr/lib/x86_64-linux-gnu/libwayland-server.so*
-      - -usr/lib/x86_64-linux-gnu/libxkbcommon-x11.so*
-      - -usr/lib/x86_64-linux-gnu/libxkbcommon.so*
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqconnmanbearer.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqgenericbearer.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/bearer/libqnmbearer.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevkeyboardplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevmouseplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevtabletplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqevdevtouchplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqlibinputplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/generic/libqtuiotouchplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/imageformats/libqgif.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/imageformats/libqico.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/imageformats/libqjpeg.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqeglfs.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqlinuxfb.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqminimal.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqminimalegl.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqoffscreen.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/platforms/libqxcb.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/xcbglintegrations/libqxcb-egl-integration.so
-      - -usr/lib/x86_64-linux-gnu/qt5/plugins/xcbglintegrations/libqxcb-glx-integration.so
-      - -usr/lib/x86_64-linux-gnu/libfontconfig.so*
-      - -usr/lib/x86_64-linux-gnu/libharfbuzz.so*
-      - -usr/lib/x86_64-linux-gnu/libinput.so*
 
   ppa:
     plugin: nil
     override-build: |
       snapcraftctl build
-      add-apt-repository ppa:mc3man/mpv-tests -y
-      add-apt-repository ppa:jonathonf/ffmpeg-3 -y
       apt-add-repository http://archive.neon.kde.org/user -y
       wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
-      apt update
-      apt upgrade -y && apt install -f -y
+      apt update && apt upgrade -y && apt install -f -y
     build-packages:
       - software-properties-common
       - wget
@@ -99,35 +33,117 @@ parts:
     plugin: nil
     after:
       - ppa
-      - desktop-qt5
     override-build: |
       snapcraftctl build
-      set -ex
-      ver=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep Leap | grep mpc-qt | sed '1,11d;13,18d;s|href="||g;s|">64||g' | awk '{print $3}' | sed -n 's/.*mpc-qt//p' | cut -c02-06)
-      echo $ver > $SNAPCRAFT_STAGE/version
-      mpcurl=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep Leap | grep mpc-qt | sed '1,11d;13,18d;s|href="||g;s|">64||g' | awk '{print $3}')
-      wget $mpcurl
-      rpm2cpio mpc-qt*.rpm | cpio -idmv
-      cp 'usr/share/applications/Media Player Classic Qute Theater.desktop' usr/share/applications/mpc-qt.desktop
-      rm 'usr/share/applications/Media Player Classic Qute Theater.desktop' && cp -R -p usr $SNAPCRAFT_PART_INSTALL
-      sed -i 's|Icon=mpc-qt|Icon=/usr/share/pixmaps/mpc-qt\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/mpc-qt.desktop
-    stage-packages:
-      - mpv
-      - libmpv1
-      - ffmpeg
-      - libqt5core5a
-      - libqt5gui5
-      - libqt5network5
-      - libqt5quickwidgets5
-      - libqt5x11extras5
-      - libvdpau-va-gl1
-      - libgl1-mesa-dri
-      - libgl1-mesa-glx
-      - libglu1-mesa
+      # set -ex
+      git clone --depth 1 https://github.com/mpv-player/mpv-build.git
+      cd mpv-build
+      ./use-ffmpeg-master
+      ./use-libass-master
+      ./use-mpv-master
+      # mk-build-deps -s -i
+      echo --enable-libmpv-shared > mpv_options
+      ./update
+      ./build -j4
+      ./install --prefix=$SNAPCRAFT_PART_INSTALL/
+      ldconfig
+      git clone --depth 1 https://github.com/cmdrkotori/mpc-qt.git
+      cd mpc-qt
+      qmake
+      make -j4
+      make install
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/bin
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/applications
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps/
+      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/mpc-qt
+      cp -p /usr/local/bin/mpc-qt $SNAPCRAFT_PART_INSTALL/usr/bin
+      cp -p /usr/local/share/applications/mpc-qt.desktop $SNAPCRAFT_PART_INSTALL/usr/share/applications
+      cp -p /usr/local/share/icons/hicolor/scalable/apps/mpc-qt.svg $SNAPCRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps
+      cp -R -p /usr/local/share/mpc-qt/translations $SNAPCRAFT_PART_INSTALL/usr/share/mpc-qt
+      mkdir -p $SNAPCRAFT_PART_INSTALL/kf5
+      for kf in kf5-launch kf5-setup register-prefix
+      do
+      wget https://cgit.kde.org/scratch/apol/kf5-snap-env.git/plain/$kf && chmod +x $kf && mv $kf $SNAPCRAFT_PART_INSTALL
+      done
+    # stage-packages:
     build-packages:
-      - wget
-      - rpm2cpio
-      - cpio
+      - git
+      - devscripts
+      - equivs
+      - autoconf
+      - automake
+      - c-compiler
+      - gcc
+      - debhelper
+      - ladspa-sdk
+      - libasound2-dev
+      - libbluray-dev
+      - libbs2b-dev
+      - libcaca-dev
+      - libcdio-paranoia-dev
+      - libdvdnav-dev
+      - libdvdread-dev
+      - libegl1-mesa-dev
+      - libfontconfig-dev
+      - libfreetype6-dev
+      - libfribidi-dev
+      - libgl1-mesa-dev
+      - libgbm-dev
+      - libgme-dev
+      - libgnutls28-dev
+      - libgsm1-dev
+      - libharfbuzz-dev
+      - libjack-jackd2-dev
+      - libjpeg-dev
+      - liblcms2-dev
+      - liblircclient-dev
+      - liblua5.2-dev
+      - libmodplug-dev
+      - libmp3lame-dev
+      - libopenal-dev
+      - libopus-dev
+      - libopencore-amrnb-dev
+      - libopencore-amrwb-dev
+      - libpulse-dev
+      - librtmp-dev
+      - librubberband-dev
+      - libsmbclient-dev
+      - libssh-dev
+      - libsoxr-dev
+      - libspeex-dev
+      - libtool
+      - libuchardet-dev
+      - libv4l-dev
+      - libva-dev
+      - libvdpau-dev
+      - libvorbis-dev
+      - libvo-amrwbenc-dev
+      - libvpx-dev
+      - libwavpack-dev
+      - libx264-dev
+      - libx11-dev
+      - libxext-dev
+      - libxinerama-dev
+      - libxrandr-dev
+      - libxss-dev
+      - libxv-dev
+      - libxvidcore-dev
+      - pkg-config
+      - python
+      - python-docutils
+      - x11proto-core-dev
+      - yasm
+      - libsdl2-dev
+      - zlib1g-dev
+      - qt5-qmake-bin
+      - qt5-default
+      - libqt5x11extras5-dev
+      - qttools5-dev-tools
+      - qtbase5-private-dev
+      - libxcb1-dev
+      - libxcb-shm0-dev
+      - libxcb-xfixes0-dev
+      - texinfo
     prime:
       - -usr/share/doc
       - -usr/share/man
@@ -135,7 +151,7 @@ parts:
 
 apps:
   mpc-qt:
-    command: desktop-launch $SNAP/usr/bin/mpc-qt
+    command: kf5-launch $SNAP/usr/bin/mpc-qt
     desktop: usr/share/applications/mpc-qt.desktop
     plugs:
       - x11
@@ -149,6 +165,7 @@ apps:
       - mount-observe
       - desktop-legacy
       - removable-media
+      - kde-frameworks-5-plug
       - screen-inhibit-control
     slots:
       - mpris
