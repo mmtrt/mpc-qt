@@ -65,8 +65,11 @@ parts:
       wget https://raw.githubusercontent.com/apachelogger/kf5-snap-env/master/kf5-launch && chmod +x kf5-launch && mv kf5-launch $SNAPCRAFT_PART_INSTALL
     stage-packages:
       - libxrandr2
-      - libvdpau-va-gl1
       - libgl1-mesa-dri
+      - libegl1-mesa
+      - libva-drm1
+      - libpulse0
+      - libasound2
     build-packages:
       - git
       - devscripts
