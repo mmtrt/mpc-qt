@@ -36,7 +36,7 @@ parts:
     override-build: |
       snapcraftctl build
       # set -ex
-      git clone --depth 1 https://github.com/mpv-player/mpv-build.git
+      git clone https://github.com/mpv-player/mpv-build.git
       cd mpv-build
       ./use-ffmpeg-master
       ./use-libass-master
@@ -45,9 +45,9 @@ parts:
       echo --enable-libmpv-shared > mpv_options
       ./update
       ./build -j4
-      ./install --prefix=$SNAPCRAFT_PART_INSTALL/
+      ./install
       ldconfig
-      git clone --depth 1 https://github.com/cmdrkotori/mpc-qt.git
+      git clone https://github.com/cmdrkotori/mpc-qt.git
       cd mpc-qt
       sed -i '2128d' mainwindow.cpp
       qmake
@@ -62,11 +62,11 @@ parts:
       cp -p /usr/local/share/icons/hicolor/scalable/apps/mpc-qt.svg $SNAPCRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps
       cp -R -p /usr/local/share/mpc-qt/translations $SNAPCRAFT_PART_INSTALL/usr/share/mpc-qt
       mkdir -p $SNAPCRAFT_PART_INSTALL/kf5
-      for kf in kf5-launch kf5-setup register-prefix
-      do
-      wget https://cgit.kde.org/scratch/apol/kf5-snap-env.git/plain/$kf && chmod +x $kf && mv $kf $SNAPCRAFT_PART_INSTALL
-      done
-    # stage-packages:
+      wget https://raw.githubusercontent.com/apachelogger/kf5-snap-env/master/kf5-launch && chmod +x kf5-launch && mv kf5-launch $SNAPCRAFT_PART_INSTALL
+    stage-packages:
+      - libxrandr2
+      - libvdpau-va-gl1
+      - libgl1-mesa-dri
     build-packages:
       - git
       - devscripts
@@ -149,6 +149,12 @@ parts:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
+      - -usr/lib/x86_64-linux-gnu/libQt5Core.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5DBus.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Gui.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Network.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so*
+      - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so*
 
 apps:
   mpc-qt:
