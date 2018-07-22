@@ -49,6 +49,7 @@ parts:
       ldconfig
       git clone --depth 1 https://github.com/cmdrkotori/mpc-qt.git
       cd mpc-qt
+      sed -i '2128d' mainwindow.cpp
       qmake
       make -j4
       make install
