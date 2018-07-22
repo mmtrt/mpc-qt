@@ -135,7 +135,7 @@ parts:
       - yasm
       - libsdl2-dev
       - zlib1g-dev
-      - qt5-qmake-bin
+      - qt5-qmake
       - qt5-default
       - libqt5x11extras5-dev
       - qttools5-dev-tools
