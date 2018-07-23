@@ -19,20 +19,20 @@ plugs:
 
 parts:
 
-  ppa:
-    plugin: nil
-    override-build: |
-      snapcraftctl build
-      apt-add-repository http://archive.neon.kde.org/user -y
-      wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
-      apt update && apt upgrade -y && apt install -f -y
-    build-packages:
-      - software-properties-common
-      - wget
+  # ppa:
+  #   plugin: nil
+  #   override-build: |
+  #     snapcraftctl build
+  #     apt-add-repository http://archive.neon.kde.org/user -y
+  #     wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
+  #     apt update && apt upgrade -y && apt install -f -y
+  #   build-packages:
+  #     - software-properties-common
+  #     - wget
   mpc-qt:
     plugin: nil
-    after:
-      - ppa
+    # after:
+    #   - ppa
     override-build: |
       snapcraftctl build
       # set -ex
