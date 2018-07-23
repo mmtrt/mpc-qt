@@ -150,6 +150,7 @@ parts:
       - libxcb-xfixes0-dev
       - texinfo
       - wget
+      - curl
     prime:
       - -usr/share/doc
       - -usr/share/man
