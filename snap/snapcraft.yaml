@@ -10,29 +10,30 @@ architectures:
   - build-on: amd64
     run-on: [amd64]
 
-plugs:
-  kde-frameworks-5-plug:
-    content: kde-frameworks-5-47-qt-5-11-ubuntu-1604
-    default-provider: kde-frameworks-5
-    interface: content
-    target: kf5
+# plugs:
+#   kde-frameworks-5-plug:
+#     content: kde-frameworks-5-47-qt-5-11-ubuntu-1604
+#     default-provider: kde-frameworks-5
+#     interface: content
+#     target: kf5
 
 parts:
-
-  # ppa:
-  #   plugin: nil
-  #   override-build: |
-  #     snapcraftctl build
-  #     apt-add-repository http://archive.neon.kde.org/user -y
-  #     wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
-  #     apt update && apt upgrade -y && apt install -f -y
-  #   build-packages:
-  #     - software-properties-common
-  #     - wget
+  ppa:
+    plugin: nil
+    override-build: |
+      snapcraftctl build
+      apt-add-repository http://archive.neon.kde.org/user -y
+      wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
+      apt update && apt upgrade -y && apt install -f -y
+      # apt install qt5-qmake-bin qt5-default libqt5x11extras5-dev qttools5-dev-tools qtbase5-private-dev
+    build-packages:
+      - software-properties-common
+      - wget
   mpc-qt:
     plugin: nil
-    # after:
-    #   - ppa
+    after:
+      - desktop-qt5
+      - ppa
     override-build: |
       snapcraftctl build
       # set -ex
@@ -62,8 +63,8 @@ parts:
       cp -p /usr/local/share/applications/mpc-qt.desktop $SNAPCRAFT_PART_INSTALL/usr/share/applications
       cp -p /usr/local/share/icons/hicolor/scalable/apps/mpc-qt.svg $SNAPCRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps
       cp -R -p /usr/local/share/mpc-qt/translations $SNAPCRAFT_PART_INSTALL/usr/share/mpc-qt
-      mkdir -p $SNAPCRAFT_PART_INSTALL/kf5
-      wget https://raw.githubusercontent.com/apachelogger/kf5-snap-env/master/kf5-launch && chmod +x kf5-launch && mv kf5-launch $SNAPCRAFT_PART_INSTALL
+      # mkdir -p $SNAPCRAFT_PART_INSTALL/kf5
+      # wget https://raw.githubusercontent.com/apachelogger/kf5-snap-env/master/kf5-launch && chmod +x kf5-launch && mv kf5-launch $SNAPCRAFT_PART_INSTALL
     stage-packages:
       - libxrandr2
       - libgl1-mesa-dri
@@ -164,7 +165,7 @@ parts:
 
 apps:
   mpc-qt:
-    command: kf5-launch $SNAP/usr/bin/mpc-qt
+    command: desktop-launch $SNAP/usr/bin/mpc-qt
     desktop: usr/share/applications/mpc-qt.desktop
     plugs:
       - x11
@@ -178,7 +179,7 @@ apps:
       - mount-observe
       - desktop-legacy
       - removable-media
-      - kde-frameworks-5-plug
+      # - kde-frameworks-5-plug
       - screen-inhibit-control
     slots:
       - mpris
