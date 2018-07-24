@@ -47,8 +47,8 @@ parts:
       ./build -j4
       ./install
       ldconfig
-      curl -s https://api.github.com/repos/cmdrkotori/mpc-qt/releases/latest | grep tarball_url | cut -d '"' -f 4 | xargs wget --no-check-certificate --content-disposition && mkdir mpc-qt && tar xvzf *.tar.gz --strip 1 -C mpc-qt && rm *.tar.gz
-      # git clone https://github.com/cmdrkotori/mpc-qt.git
+      # curl -s https://api.github.com/repos/cmdrkotori/mpc-qt/releases/latest | grep tarball_url | cut -d '"' -f 4 | xargs wget --no-check-certificate --content-disposition && mkdir mpc-qt && tar xvzf *.tar.gz --strip 1 -C mpc-qt && rm *.tar.gz
+      git clone https://github.com/cmdrkotori/mpc-qt.git
       cd mpc-qt
       # sed -i '2128d' mainwindow.cpp
       qmake
@@ -150,7 +150,7 @@ parts:
       - libxcb-xfixes0-dev
       - texinfo
       - wget
-      - curl
+      # - curl
     prime:
       - -usr/share/doc
       - -usr/share/man
