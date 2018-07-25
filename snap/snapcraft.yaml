@@ -25,7 +25,7 @@ parts:
       apt-add-repository http://archive.neon.kde.org/user -y
       wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
       apt update && apt upgrade -y && apt install -f -y
-      # apt install qt5-qmake-bin qt5-default libqt5x11extras5-dev qttools5-dev-tools qtbase5-private-dev
+      apt install qt5-qmake-bin qt5-default libqt5x11extras5-dev qttools5-dev-tools qtbase5-private-dev
     build-packages:
       - software-properties-common
       - wget
@@ -141,11 +141,11 @@ parts:
       - yasm
       - libsdl2-dev
       - zlib1g-dev
-      - qt5-qmake
-      - qt5-default
-      - libqt5x11extras5-dev
-      - qttools5-dev-tools
-      - qtbase5-private-dev
+      # - qt5-qmake
+      # - qt5-default
+      # - libqt5x11extras5-dev
+      # - qttools5-dev-tools
+      # - qtbase5-private-dev
       - libxcb1-dev
       - libxcb-shm0-dev
       - libxcb-xfixes0-dev
@@ -156,12 +156,12 @@ parts:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
-      - -usr/lib/x86_64-linux-gnu/libQt5Core.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5DBus.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Gui.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Network.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so*
-      - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so*
+      # - -usr/lib/x86_64-linux-gnu/libQt5Core.so*
+      # - -usr/lib/x86_64-linux-gnu/libQt5DBus.so*
+      # - -usr/lib/x86_64-linux-gnu/libQt5Gui.so*
+      # - -usr/lib/x86_64-linux-gnu/libQt5Network.so*
+      # - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so*
+      # - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so*
 
 apps:
   mpc-qt:
