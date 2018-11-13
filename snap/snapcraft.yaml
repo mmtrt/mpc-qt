@@ -70,7 +70,7 @@ parts:
       - libxrandr2
       - libgl1-mesa-dri
       - libegl1-mesa
-      - libva-drm1
+      - libva-drm2
       - libpulse0
       - libasound2
     build-packages:
