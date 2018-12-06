@@ -36,9 +36,8 @@ parts:
       mpcurl=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep "Leap_15" | sed 's|="| |g;s|"| |g;3,6d;1d' | awk '{print $5}')
       wget $mpcurl
       rpm2cpio mpc-qt*.rpm | cpio -idmv
-      cp 'usr/share/applications/Media Player Classic Qute Theater.desktop' usr/share/applications/mpc-qt.desktop
-      rm 'usr/share/applications/Media Player Classic Qute Theater.desktop' && cp -R -p usr $SNAPCRAFT_PART_INSTALL
-      sed -i 's|Icon=mpc-qt|Icon=/usr/share/pixmaps/mpc-qt\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/mpc-qt.desktop
+      mv 'usr/share/applications/Media Player Classic Qute Theater.desktop' usr/share/applications/mpc-qt.desktop && cp -R -p usr $SNAPCRAFT_PART_INSTALL
+      sed -i 's|Icon=mpc-qt|Icon=${SNAP}/usr/share/pixmaps/mpc-qt\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/mpc-qt.desktop
     stage-packages:
       - mpv
       - libmpv1
