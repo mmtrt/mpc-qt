@@ -52,6 +52,7 @@ parts:
       - libgl1-mesa-dri
       - libgl1-mesa-glx
       - libglu1-mesa
+      - samba-libs
     build-packages:
       - wget
       - rpm2cpio
