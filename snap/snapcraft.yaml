@@ -46,16 +46,11 @@ parts:
     build-packages:
       - wget
       - rpm2cpio
+      - cpio
     stage:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
-
-  #desktop-qt5:
-    #stage:
-      #- -usr/share/doc
-      #- -usr/share/man
-      #- -usr/share/lintian
 
 apps:
   mpc-qt:
