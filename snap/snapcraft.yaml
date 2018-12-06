@@ -6,7 +6,7 @@ description: |
   Media Player Classic Home Cinema (mpc-hc) is considered by many to be the quintessential media player for the Windows desktop. Media Player Classic Qute Theater (mpc-qt) aims to reproduce most of the interface and functionality of mpc-hc while using libmpv to play video instead of DirectShow.
 
 grade: devel
-confinement: devmode
+confinement: strict
 architectures:
   - build-on: amd64
     run-on: [amd64]
@@ -42,7 +42,16 @@ parts:
     stage-packages:
       - mpv
       - libmpv1
+      - ffmpeg
+      - libqt5core5a
+      - libqt5gui5
+      - libqt5network5
+      - libqt5quickwidgets5
+      - libqt5x11extras5
       - libvdpau-va-gl1
+      - libgl1-mesa-dri
+      - libgl1-mesa-glx
+      - libglu1-mesa
     build-packages:
       - wget
       - rpm2cpio
