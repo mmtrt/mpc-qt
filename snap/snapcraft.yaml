@@ -1,168 +1,61 @@
 name: mpc-qt
-version: 18.03+git
+version: latest
+version-script: cat $SNAPCRAFT_STAGE/version
 summary: A clone of Media Player Classic reimplemented in Qt.
 description: |
   Media Player Classic Home Cinema (mpc-hc) is considered by many to be the quintessential media player for the Windows desktop. Media Player Classic Qute Theater (mpc-qt) aims to reproduce most of the interface and functionality of mpc-hc while using libmpv to play video instead of DirectShow.
 
 grade: devel
 confinement: devmode
-base: core18
 architectures:
   - build-on: amd64
     run-on: [amd64]
-
-# plugs:
-#   kde-frameworks-5-plug:
-#     content: kde-frameworks-5-47-qt-5-11-ubuntu-1604
-#     default-provider: kde-frameworks-5
-#     interface: content
-#     target: kf5
+base: core18
 
 parts:
-  #ppa:
-    #plugin: nil
-    #override-build: |
-      #snapcraftctl build
-      #apt-add-repository http://archive.neon.kde.org/user -y
-      #wget -q -O - http://archive.neon.kde.org/public.key | apt-key add -
-      #apt update && apt upgrade -y && apt install -f -y
-      #apt install qt5-qmake-bin qt5-default libqt5x11extras5-dev qttools5-dev-tools qtbase5-private-dev
-    #build-packages:
-      #- software-properties-common
-      #- wget
+  ppa:
+    plugin: nil
+    override-build: |
+      snapcraftctl build
+      add-apt-repository ppa:mc3man/mpv-tests -y
+      add-apt-repository ppa:jonathonf/ffmpeg-4 -y
+      apt update
+    build-packages:
+      - software-properties-common
+      - wget
   mpc-qt:
     plugin: nil
     after:
+      - ppa
       - desktop-qt5
-      #- ppa
     override-build: |
       snapcraftctl build
-      # set -ex
-      git clone https://github.com/mpv-player/mpv-build.git
-      cd mpv-build
-      ./use-ffmpeg-master
-      ./use-libass-master
-      ./use-mpv-master
-      # mk-build-deps -s -i
-      echo --enable-libmpv-shared > mpv_options
-      ./update
-      ./build -j4
-      ./install
-      ldconfig
-      # curl -s https://api.github.com/repos/cmdrkotori/mpc-qt/releases/latest | grep tarball_url | cut -d '"' -f 4 | xargs wget --no-check-certificate --content-disposition && mkdir mpc-qt && tar xvzf *.tar.gz --strip 1 -C mpc-qt && rm *.tar.gz
-      git clone https://github.com/cmdrkotori/mpc-qt.git
-      cd mpc-qt
-      # sed -i '2128d' mainwindow.cpp
-      qmake
-      make -j4
-      make install
-      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/bin
-      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/applications
-      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps/
-      mkdir -p $SNAPCRAFT_PART_INSTALL/usr/share/mpc-qt
-      cp -p /usr/local/bin/mpc-qt $SNAPCRAFT_PART_INSTALL/usr/bin
-      cp -p /usr/local/share/applications/mpc-qt.desktop $SNAPCRAFT_PART_INSTALL/usr/share/applications
-      cp -p /usr/local/share/icons/hicolor/scalable/apps/mpc-qt.svg $SNAPCRAFT_PART_INSTALL/usr/share/icons/hicolor/scalable/apps
-      cp -R -p /usr/local/share/mpc-qt/translations $SNAPCRAFT_PART_INSTALL/usr/share/mpc-qt
-      # mkdir -p $SNAPCRAFT_PART_INSTALL/kf5
-      # wget https://raw.githubusercontent.com/apachelogger/kf5-snap-env/master/kf5-launch && chmod +x kf5-launch && mv kf5-launch $SNAPCRAFT_PART_INSTALL
+      set -ex
+      ver=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep "Leap_15" | sed 's|="| |g;s|"| |g;3,6d;1d;s/.*mpc-qt-//g;s|-| |g' | awk '{print $1}')
+      echo $ver > $SNAPCRAFT_STAGE/version
+      mpcurl=$(wget https://software.opensuse.org/package/mpc-qt -q -S -O - 2>&1 | grep "Leap_15" | sed 's|="| |g;s|"| |g;3,6d;1d' | awk '{print $5}')
+      wget $mpcurl
+      rpm2cpio mpc-qt*.rpm | cpio -idmv
+      cp 'usr/share/applications/Media Player Classic Qute Theater.desktop' usr/share/applications/mpc-qt.desktop
+      rm 'usr/share/applications/Media Player Classic Qute Theater.desktop' && cp -R -p usr $SNAPCRAFT_PART_INSTALL
+      sed -i 's|Icon=mpc-qt|Icon=/usr/share/pixmaps/mpc-qt\.svg|' $SNAPCRAFT_PART_INSTALL/usr/share/applications/mpc-qt.desktop
     stage-packages:
-      - libxrandr2
-      - libgl1-mesa-dri
-      - libegl1-mesa
-      - libva-drm2
-      - libpulse0
-      - libasound2
+      - mpv
+      - libmpv1
+      - libvdpau-va-gl1
     build-packages:
-      - git
-      - devscripts
-      - equivs
-      - autoconf
-      - automake
-      - c-compiler
-      - gcc
-      - debhelper
-      - ladspa-sdk
-      - libasound2-dev
-      - libbluray-dev
-      - libbs2b-dev
-      - libcaca-dev
-      - libcdio-paranoia-dev
-      - libdvdnav-dev
-      - libdvdread-dev
-      - libegl1-mesa-dev
-      - libfontconfig-dev
-      - libfreetype6-dev
-      - libfribidi-dev
-      - libgl1-mesa-dev
-      - libgbm-dev
-      - libgme-dev
-      - libgnutls28-dev
-      - libgsm1-dev
-      - libharfbuzz-dev
-      - libjack-jackd2-dev
-      - libjpeg-dev
-      - liblcms2-dev
-      - liblircclient-dev
-      - liblua5.2-dev
-      - libmodplug-dev
-      - libmp3lame-dev
-      - libopenal-dev
-      - libopus-dev
-      - libopencore-amrnb-dev
-      - libopencore-amrwb-dev
-      - libpulse-dev
-      - librtmp-dev
-      - librubberband-dev
-      - libsmbclient-dev
-      - libssh-dev
-      - libsoxr-dev
-      - libspeex-dev
-      - libtool
-      - libuchardet-dev
-      - libv4l-dev
-      - libva-dev
-      - libvdpau-dev
-      - libvorbis-dev
-      - libvo-amrwbenc-dev
-      - libvpx-dev
-      - libwavpack-dev
-      - libx264-dev
-      - libx11-dev
-      - libxext-dev
-      - libxinerama-dev
-      - libxrandr-dev
-      - libxss-dev
-      - libxv-dev
-      - libxvidcore-dev
-      - pkg-config
-      - python
-      - python-docutils
-      - x11proto-core-dev
-      - yasm
-      - libsdl2-dev
-      - zlib1g-dev
-      - qt5-qmake
-      - qt5-default
-      - libqt5x11extras5-dev
-      - qttools5-dev-tools
-      - qtbase5-private-dev
-      - libxcb1-dev
-      - libxcb-shm0-dev
-      - libxcb-xfixes0-dev
-      - texinfo
       - wget
-      # - curl
-    prime:
+      - rpm2cpio
+    stage:
       - -usr/share/doc
       - -usr/share/man
       - -usr/share/lintian
-      # - -usr/lib/x86_64-linux-gnu/libQt5Core.so*
-      # - -usr/lib/x86_64-linux-gnu/libQt5DBus.so*
-      # - -usr/lib/x86_64-linux-gnu/libQt5Gui.so*
-      # - -usr/lib/x86_64-linux-gnu/libQt5Network.so*
-      # - -usr/lib/x86_64-linux-gnu/libQt5Widgets.so*
-      # - -usr/lib/x86_64-linux-gnu/libQt5X11Extras.so*
+
+  #desktop-qt5:
+    #stage:
+      #- -usr/share/doc
+      #- -usr/share/man
+      #- -usr/share/lintian
 
 apps:
   mpc-qt:
@@ -180,7 +73,6 @@ apps:
       - mount-observe
       - desktop-legacy
       - removable-media
-      # - kde-frameworks-5-plug
       - screen-inhibit-control
     slots:
       - mpris
